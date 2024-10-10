@@ -1,38 +1,31 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Main {
     public static void main(String[] args) {
 
-        String  text1 = "В тексте, который вы видите на этом изображении, " +
-                "посчитайте количество букв ‘е’ в каждом слове";
-
-        String replaceText = text1.replaceAll("[а-яА-ЯёЁ\\s]","");
-
-        System.out.println(replaceText);
-
-        System.out.println("выражение для проверки номера +7 XXX XXX-XX-XX " +
-                "^(\\+\\d|8)(\\D{0,2})(\\d{1,3})(\\D)(\\d{1,3})(\\D)(\\d{1,2})\\D(\\d{1,2})$");
-
-        String  text = "В тексте, который вы видите на этом изображении, " +
-                "посчитайте количество букв ‘е’ в каждом слове";
-
-        int number_e = 0;
-        int word = 0 ;
-
-        print(text + "\n");
-
-        for (int n = 0; n <text.length() ; n++){
-            if  ( text.charAt(n) == 'е' ) {
-                number_e++;
-            }
-            if( text.charAt(n) == ' '){
-                word++;
-                print( " " + number_e + "e");
-                number_e = 0;
-            }
-            print(text.charAt(n) + "");
-        }
-        print(" " + number_e + "е");
+        filterNumber("+7(987)654-32-10");
+        filterNumber(" g + 89 ( 123 ) 456-78-910");
+        String userString = ">?^^^?< Java-машины. Дата официального выпуска — 23 мая 1995 года.|Ёё$";
+        String result = remove(userString);
+        System.out.println(userString);
+        Main.printResult(result);
     }
-    private static void print(String text) {
-        System.out.print(text);
+    public  static void  filterNumber (String userPhoneNumber) {
+        System.out.println(userPhoneNumber + " user phone number");
+        String filterNumber1 = userPhoneNumber.replaceAll("[^\\d+]", "");
+
+         if (filterNumber1.matches("^\\+[\\d]{1,15}$")) {
+            System.out.println(filterNumber1 + " correctly\n");
+        } else {
+            System.out.println(filterNumber1 + " incorrectly\n");
+        }
+    }
+    private static String remove (String userString){
+        return userString.replaceAll("([A-zА-яЁё\\s])","");
+    }
+    private static String  printResult(String result) {
+        System.out.println(result + "//результат удаления букв и пробелов//");
+        return result;
     }
 }

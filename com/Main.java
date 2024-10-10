@@ -9,7 +9,7 @@ public class Main {
         String userString = ">?^^^?< Java-машины. Дата официального выпуска — 23 мая 1995 года.|Ёё$";
         String result = remove(userString);
         System.out.println(userString);
-        Main.printResult(result);
+        printResult(result);
     }
     public  static void  filterNumber (String userPhoneNumber) {
         System.out.println(userPhoneNumber + " user phone number");

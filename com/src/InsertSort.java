@@ -8,7 +8,6 @@ public class InsertSort {
             while (j >= 0 && list[j] > key){
                 list[j + 1] = list[j];
                 j = j -1;
-
             }
             list[j + 1 ] = key;
         }

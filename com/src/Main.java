@@ -5,10 +5,8 @@ public class Main {
     public static void main(String[] args) {
 
         Timer timer = new Timer();
-       // int iteration = 1;
-        for ( int size = 1000; size <=100000 ; size = size * 10){
-            //print("сортировка на " + size + " элементов");
 
+        for ( int size = 1000; size <=100000 ; size = size * 10){
 
             Rnd rnd = new Rnd((int) System.nanoTime() % 256, 31, 71, 9999);
             for (int iteration = 1; iteration <= 4; iteration++){

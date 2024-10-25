@@ -10,17 +10,17 @@ public class DefaultCustomArrayList<E> implements CustomArrayList<E> {
 
         DefaultCustomArrayList<Integer> strings = new DefaultCustomArrayList<>();
         Iterator<Integer> iterator = strings.iterator();
-        for (int l = 0; l < 11 ; l++){
+        for (int l = 0; l < 12 ; l++){
             strings.add(l);
         }
         strings.remove(1);
         //strings.clear();
-        while (iterator.hasNext()) {
-            Integer current = iterator.next();
-            if (current.equals(5)) {
-               iterator.remove();
-            }
-        }
+      //  while (iterator.hasNext()) {
+      //      Integer current = iterator.next();
+       //     if (current.equals(5)) {
+       //        iterator.remove();
+       //     }
+      //  }
         System.out.println(strings.size + " size");
          for (Integer s : strings){System.out.print(s + ",");}
     }
@@ -44,28 +44,22 @@ public class DefaultCustomArrayList<E> implements CustomArrayList<E> {
     @Override
     public boolean remove(E element) {
 
-        for (int k = 0; k < size; k++){                                         // ver.1 , v2 ,v3 on
-            // version 3
-            E[] temp = list;                                                    // v3
-            list = (E[]) new Object[temp.length - 1];                           // v3
-            System.arraycopy(temp, 0, list, 0, k);                // v3
-            int temp1 = temp.length - k - 1;                                    // v3
-            System.arraycopy(temp, k + 1, list, k, temp1);               // v3
-            //   if (list[k].equals(element)) {                                 // v1 , v2
+        for (int k = 0; k < size; k++){
+               if (list[k].equals(element)) {
             //  version 1 //
-            //         System.arraycopy(list, k + 1, list, k, size - k - 1);    // v1
+                     System.arraycopy(list, k + 1, list, k, size - k - 1);
             //  version 2 //
-            // for (int m = k; m < size - k; m++) {list[k] = list[k + 1];}      //v 2
+            // for (int m = k; m < size - k; m++) {list[k] = list[k + 1];}
 
             list[-- size] = null;
             return true;
-       // }                                                                     // v 1 , 2
+        }
     }
         return false;
     }
     private void remove(int index) {
         System.arraycopy(list, index + 1, list, index, size - index - 1);
-        list[--size] = null;
+       list[--size] = null;
     }
 
     @Override

@@ -15,12 +15,12 @@ public class DefaultCustomArrayList<E> implements CustomArrayList<E> {
         }
         strings.remove(1);
         //strings.clear();
-      //  while (iterator.hasNext()) {
-      //      Integer current = iterator.next();
-       //     if (current.equals(5)) {
-       //        iterator.remove();
-       //     }
-      //  }
+        while (iterator.hasNext()) {
+            Integer current = iterator.next();
+            if (current.equals(5)) {
+               iterator.remove();
+            }
+        }
         System.out.println(strings.size + " size");
          for (Integer s : strings){System.out.print(s + ",");}
     }
@@ -46,12 +46,18 @@ public class DefaultCustomArrayList<E> implements CustomArrayList<E> {
 
         for (int k = 0; k < size; k++){
                if (list[k].equals(element)) {
-            //  version 1 //
-                     System.arraycopy(list, k + 1, list, k, size - k - 1);
-            //  version 2 //
-            // for (int m = k; m < size - k; m++) {list[k] = list[k + 1];}
+                   //  version 1 //
+                   //   System.arraycopy(list, k + 1, list, k, size - k - 1);
+                   //  version 2 //
+                   // for (int m = k; m < size - k; m++) {list[k] = list[k + 1];}
+                   //  version 3 //
+                   E[] temp = list;
+                   list = (E[]) new Object[temp.length - 1];
+                   System.arraycopy(temp, 0, list, 0, k);
+                   int temp1 = temp.length - k - 1;
+                   System.arraycopy(temp, k + 1, list, k, temp1);
 
-            list[-- size] = null;
+                   list[-- size] = null;
             return true;
         }
     }

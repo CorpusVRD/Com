@@ -43,17 +43,24 @@ public class DefaultCustomArrayList<E> implements CustomArrayList<E> {
     }
     @Override
     public boolean remove(E element) {
-         for (int k = 0; k < size; k++) {
-            if (list[k].equals(element)) {
-                // вариант1 //
-                System.arraycopy(list, k + 1, list, k, size - k - 1);
-                // вариант2 //
-               // for (int m = k; m < size - k; m++) {list[k] = list[k + 1];}
 
-                list[--size] = null;
-                return true;
-            }
-        }
+        for (int k = 0; k < size; k++){                                         // ver.1 , v2 ,v3 on
+            // version 3
+            E[] temp = list;                                                    // v3
+            list = (E[]) new Object[temp.length - 1];                           // v3
+            System.arraycopy(temp, 0, list, 0, k);                // v3
+            int temp1 = temp.length - k - 1;                                    // v3
+            System.arraycopy(temp, k + 1, list, k, temp1);               // v3
+            //   if (list[k].equals(element)) {                                 // v1 , v2
+            //  version 1 //
+            //         System.arraycopy(list, k + 1, list, k, size - k - 1);    // v1
+            //  version 2 //
+            // for (int m = k; m < size - k; m++) {list[k] = list[k + 1];}      //v 2
+
+            list[-- size] = null;
+            return true;
+       // }                                                                     // v 1 , 2
+    }
         return false;
     }
     private void remove(int index) {
